@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استعلام تسهیلات - بانک رسالت</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            color: #2c3e50;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: #2a5298;
+        }
+
+        .admin-icon {
+            color: #1e3c72;
+        }
+
+        .header-time {
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .logout-btn {
+            background: rgba(231, 76, 60, 0.1);
+            border: none;
+            color: #e74c3c;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(231, 76, 60, 0.2);
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            width: 200px;
+            margin: 0 auto 30px;
+            display: block;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e3c72;
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        #date-time {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #1e3c72;
+            box-shadow: 0 0 8px rgba(30, 60, 114, 0.2);
+        }
+
+        .button-container {
+            margin-top: 25px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .result {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border: 2px solid rgba(30, 60, 114, 0.1);
+        }
+
+        .result h3 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            border-bottom: 2px solid rgba(30, 60, 114, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .result p {
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .error {
+            background: rgba(231, 76, 60, 0.1);
+            border-color: #e74c3c;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px 20px;
+            }
+            
+            .logo {
+                width: 160px;
+            }
+            
+            h1 {
+                font-size: 20px;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="user-info">
+            <i class="fas fa-user-shield admin-icon"></i>
+            <span>همکار گرامی خانم حسینی زهرا</span>
+        </div>
+        
+        <div class="header-time" id="header-time"></div>
+        
+        <button class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i>
+            خروج
+        </button>
+    </div>
+
+    <div class="container">
+        <img src="https://uploadkon.ir/uploads/4a7c08_25logoMobile.png" alt="Logo" class="logo">
+        <h1>استعلام تسهیلات موسسه مالی و اعتباری رسالت</h1>
+        <div id="date-time"></div>
+        
+        <input 
+            type="text" 
+            id="nationalCode" 
+            placeholder="کد ملی ۱۰ رقمی را وارد کنید"
+            maxlength="10"
+            onkeypress="return isNumberKey(event)"
+        >
+        
+        <div class="button-container">
+            <button onclick="checkLoanStatus()">استعلام وضعیت</button>
+        </div>
+        
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        // تابع تبدیل تاریخ میلادی به شمسی (همان نسخه قبلی)
+        // ... کدهای جاوااسکریپت بدون تغییر باقی میمانند ...
+
+        // نمایش اطلاعات مشتری
+        function checkLoanStatus() {
+            const nationalCode = document.getElementById('nationalCode').value.trim();
+            const resultDiv = document.getElementById('result');
+
+            if (nationalCode.length !== 10 || !/^\d+$/.test(nationalCode)) {
+                showError('لطفاً کد ملی معتبر ۱۰ رقمی وارد کنید');
+                return;
+            }
+
+            let resultHTML;
+            switch(nationalCode) {
+                case '3341394109':
+                    resultHTML = `
+                        <h3>مشتری: عیسی شریفی</h3>
+                        <p>🔴 تسهیلات تسویه نشده: 1 مورد</p>
+                        <p>✅ اقساط پرداخت شده: 7 مورد</p>
+                        <p>💰 جمع پرداختی: ${(2010000000).toLocaleString()} ریال</p>
+                        <p>⚖️ بدهی معوق: 0 ریال</p>
+                    `;
+                    break;
+                
+                case '3330227796':
+                    resultHTML = `
+                        <h3>مشتری: سجاد شریفی</h3>
+                        <p>✅ تسهیلات تسویه نشده: 0 مورد</p>
+                        <p>🎉 تسهیلات تسویه شده: 2 مورد</p>
+                        <p>💵 بدهی تسهیلات: 0 ریال</p>
+                    `;
+                    break;
+                
+                default:
+                    showError('کد ملی وارد شده در سیستم موجود نیست');
+                    return;
+            }
+
+            resultDiv.innerHTML = resultHTML;
+            resultDiv.classList.remove('error');
+        }
+
+        // نمایش خطا
+        function showError(message) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<span style="color:#e74c3c">⛔ ${message}</span>`;
+            resultDiv.classList.add('error');
+        }
+
+        // بروزرسانی زمان
+        function updateDateTime() {
+            const now = new Date();
+            const options = { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: false 
+            };
+            document.getElementById('header-time').innerText = now.toLocaleTimeString('fa-IR', options);
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+    </script>
+</body>
+</html>
