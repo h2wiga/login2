@@ -15,7 +15,7 @@
         }
 
         body {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: linear-gradient(135deg, #b2dfdb 0%, #80cbc4 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -36,6 +36,7 @@
             width: 180px;
             margin: 0 auto 30px;
             display: block;
+            animation: logoAnimation 2s infinite;
         }
 
         .welcome-text {
@@ -149,9 +150,24 @@
             animation: spin 2s linear infinite;
         }
 
+        .loading-logo {
+            position: absolute;
+            width: 200px;
+            height: auto;
+            opacity: 0.2;
+            filter: blur(5px);
+            z-index: -1;
+        }
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+
+        @keyframes logoAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         @media (max-width: 480px) {
@@ -169,12 +185,13 @@
 </head>
 <body>
     <div class="loading-screen" id="loadingScreen">
+        <img src="https://uploadkon.ir/uploads/265301_25bank-resalat.jpg" alt="Bank Resalat Logo" class="loading-logo">
         <div class="loading-text">همکار گرامی لطفا شکیبا باشید</div>
         <div class="loading-spinner"></div>
     </div>
 
     <div class="login-container">
-        <img src="https://uploadkon.ir/uploads/b01f26_25Bank-Resalat-logo-svg.png" alt="Bank Resalat Logo" class="logo">
+        <img src="https://uploadkon.ir/uploads/265301_25bank-resalat.jpg" alt="Bank Resalat Logo" class="logo">
         <h1 class="welcome-text">همکار گرامی خوش آمدید</h1>
         
         <form>
